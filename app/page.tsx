@@ -168,7 +168,7 @@ export default function Home() {
                   <div className="hidden md:block w-px h-20 bg-[#545351]/20"></div>
                   <div className="text-center">
                     <div className="text-[#545351]/70 text-sm mb-3 uppercase tracking-wider" style={{ fontFamily: "'Amiri', serif" }}>الوقت</div>
-                    <div className="text-[#545351] text-3xl md:text-4xl font-bold">5:00 مساءاً</div>
+                    <div className="text-[#545351] text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Amiri', serif" }}>5:00 مساءاً</div>
                   </div>
                 </div>
               </div>
