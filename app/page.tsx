@@ -6,17 +6,34 @@ export default function Home() {
   const [videoPlaying, setVideoPlaying] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  // audioRef will hold a lazily-created Audio instance so we don't load audio until needed
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handleVideoClick = () => {
     if (videoRef.current && !videoPlaying) {
       setVideoPlaying(true);
       videoRef.current.playbackRate = 0.5;
       videoRef.current.play();
-      
-      // Start audio when video plays
+
+      // Lazily create & load audio only when the user starts the video
+      if (!audioRef.current) {
+        try {
+          const a = new Audio('/mp3.mp3');
+          a.loop = true;
+          // don't force preload; let the browser decide since the element is created on user gesture
+          a.preload = 'none';
+          audioRef.current = a;
+        } catch (err) {
+          // ignore creation errors
+          console.warn('Audio creation failed', err);
+        }
+      }
+
       if (audioRef.current) {
-        audioRef.current.play();
+        audioRef.current.play().catch((e) => {
+          // autoplay may be blocked — this is expected on some mobile browsers
+          console.warn('Audio play prevented', e);
+        });
       }
     }
   };
@@ -30,14 +47,6 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-[##efeae7] overflow-hidden">
-      {/* Background Audio */}
-      <audio
-        ref={audioRef}
-        loop
-        preload="auto"
-      >
-        <source src="/mp3.mp3" type="audio/mpeg" />
-      </audio>
 
       {/* Full Screen Video */}
       {!showContent && (
@@ -53,7 +62,7 @@ export default function Home() {
             muted={true}
             
           >
-            <source src="/wedding-video.mp4" type="video/mp4" />
+            <source src="/wedding-video.mov" type="video/mp4" />
           </video>
           
 
