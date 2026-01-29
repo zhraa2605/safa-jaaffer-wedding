@@ -95,7 +95,7 @@ export default function Home() {
                     <Image
                       src="/quran-verse.png"
                       alt="آية قرآنية"
-                      className="mx-auto  -mt-12 object-contain"
+                      className="mx-auto  -mt-8 object-contain"
                       onError={() => setVerseImageError(true)}
                       width={1000}
                       height={50}
