@@ -251,10 +251,18 @@ export default function Home() {
       </div>
        <div className={`fixed bottom-0 left-0 right-0 w-full z-30 pointer-events-none select-none transition-opacity duration-700 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
   <div className="relative">
-    {/* Multiple layered shadows for smooth fade */}
+        {/* Multiple layered shadows ABOVE the image for smooth fade - prevents text from showing under image */}
+    <div className="absolute -top-32 left-0 right-0 h-32 bg-gradient-to-t from-white via-white to-transparent z-20"></div>
+    <div className="absolute -top-24 left-0 right-0 h-24 bg-gradient-to-t from-white/95 to-transparent z-20"></div>
+    <div className="absolute -top-16 left-0 right-0 h-16 bg-gradient-to-t from-white/90 to-transparent z-20"></div>
+    <div className="absolute -top-8 left-0 right-0 h-8 bg-gradient-to-t from-white/80 to-transparent z-20"></div>
+    
+    {/* Multiple layered shadows ON TOP of the image for smooth fade to page content */}
     <div className="absolute top-0 left-0 right-0 h-15 bg-gradient-to-b from-white via-white/80 to-transparent z-10"></div>
     <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/90 to-transparent z-10"></div>
     <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-white/70 to-transparent z-10"></div>
+    
+
     
     <Image
       src="/pride.png"
