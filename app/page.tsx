@@ -74,7 +74,7 @@ export default function Home() {
       {/* Main Wedding Invitation Content */}
   <div className={`relative z-10 page-bottom-space transition-all duration-2000 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
         {/* Hero Section */}
-        <section className="relative h-[50dvh] flex items-top justify-top px-4 overflow-hidden">
+        <section className="relative flex items-top justify-top px-4 overflow-hidden">
           
           
           {/* Gradient Overlay */}
@@ -82,8 +82,8 @@ export default function Home() {
           {/* Decorative Corner Elements */}
           <div className="absolute top-3 left-8 w-32 h-32 border-t-2 border-l-2 border-zinc-900/30"></div>
           <div className="absolute top-3 right-8 w-32 h-32 border-t-2 border-r-2 border-zinc-900/30"></div>
-          <div className="absolute bottom-8 left-8 w-32 h-32 border-b-2 border-l-2 border-zinc-900/30"></div>
-          <div className="absolute bottom-8 right-8 w-32 h-32 border-b-2 border-r-2 border-zinc-900/30"></div>
+          <div className="absolute bottom-3 left-8 w-32 h-32 border-b-2 border-l-2 border-zinc-900/30"></div>
+          <div className="absolute bottom-3 right-8 w-32 h-32 border-b-2 border-r-2 border-zinc-900/30"></div>
           
           <div className="relative z-10 text-center max-w-5xl mx-auto px-4">
             {/* Quranic Verse with decorative styling (image fallback) - moved above names */}
@@ -125,9 +125,7 @@ export default function Home() {
  يسعدنا دعوتكم لحضور حفل زفاف 
  </span>
               </p>
-              <div className="flex justify-center items-center gap-3 mt-6">
-                <div className="w-16 h-px bg-[#545351]/30"></div>
-                <div className="text-[#545351]/60 text-2xl">✦</div>
+              <div className="flex justify-center items-bottom gap-3 mt-6">
                 <div className="w-16 h-px bg-[#545351]/30"></div>
               </div>
             </div>
@@ -136,9 +134,9 @@ export default function Home() {
          
 
          {/* Main Names with Arabic Font - Luxury Enhanced */}
-<div className="animate-slideDown absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-2/3">
+<div className="animate-slideDown mt-2">
   <h1 className="text-zinc-900 leading-tight" style={{ fontFamily: "'Amiri', 'Scheherazade New', serif" }}>
-    <span className="block text-3xl md:text-7xl mb-4 animate-fadeInScale" 
+    <span className="block text-3xl md:text-7xl  animate-fadeInScale" 
           style={{ 
             fontWeight: 300, 
             letterSpacing: '0.08em',
@@ -147,7 +145,7 @@ export default function Home() {
       الدكتور جعفر
     </span>
     
-    <div className="flex justify-center items-center gap-8 my-10">
+    <div className="flex justify-center items-center gap-8 my-3">
       <div className="w-20 h-px bg-gradient-to-r from-transparent via-amber-800/50 to-transparent"></div>
 <span className="text-2xl md:text-4xl text-amber-900/60" style={{ fontWeight: 300, fontFamily: "'Amiri', serif" }}>و</span>
       <div className="w-20 h-px bg-gradient-to-r from-transparent via-amber-800/50 to-transparent"></div>
