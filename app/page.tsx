@@ -115,6 +115,23 @@ export default function Home() {
               </div>
             </div>
 
+            {/* Invitation Text - moved above the names */}
+            <div className="text-center mb-10 animate-fadeIn mt-6">
+              <p className="text-[#545351] text-2xl md:text-3xl font-light " style={{ fontFamily: "'Amiri', serif" }}>
+بمشاعر مليئة بالفرح والسعادة
+ولأن فرحتنا لا تكتمل إلا برؤيتكم
+<br />
+<span className="pt-50">
+ يسعدنا دعوتكم لحضور حفل زفاف 
+ </span>
+              </p>
+              <div className="flex justify-center items-center gap-3 mt-6">
+                <div className="w-16 h-px bg-[#545351]/30"></div>
+                <div className="text-[#545351]/60 text-2xl">✦</div>
+                <div className="w-16 h-px bg-[#545351]/30"></div>
+              </div>
+            </div>
+
             {/* Decorative Top */}
          
 
@@ -159,22 +176,6 @@ export default function Home() {
         {/* Details Section - Date, Time, Location */}
         <section className="relative py-10 px-4 ">
           <div className="max-w-5xl mx-auto">
-            {/* Invitation Text */}
-            <div className="text-center mb-10 animate-fadeIn">
-              <p className="text-[#545351] text-2xl md:text-3xl font-light " style={{ fontFamily: "'Amiri', serif" }}>
-بمشاعر مليئة بالفرح والسعادة
-ولأن فرحتنا لا تكتمل إلا برؤيتكم
-<br />
-<span className="pt-50">
- يسعدنا دعوتكم لحضور حفل زفاف 
- </span>             </p>
-              <div className="flex justify-center items-center gap-3 mt-6">
-                <div className="w-16 h-px bg-[#545351]/30"></div>
-                <div className="text-[#545351]/60 text-2xl">✦</div>
-                <div className="w-16 h-px bg-[#545351]/30"></div>
-              </div>
-            </div>
-
             {/* Date, Time and Day Card */}
             <div className="mb-12 animate-slideUp delay-200">
               <div className="bg-white rounded-3xl shadow-xl px-10 py-10 max-w-3xl mx-auto border border-[#545351]/10">
