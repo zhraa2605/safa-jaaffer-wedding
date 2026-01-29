@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #efeae7;
   --foreground: #171717;
 }
 
@@ -12,17 +12,33 @@
   --font-mono: var(--font-geist-mono);
 }
 
+body {
+  background: white;
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Top fade overlay to blend hero into page background */
+.top-fade {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 28vh;
+  pointer-events: none;
+  z-index: 40;
+  background: linear-gradient(180deg, rgba(239,234,231,0.95) 0%, rgba(239,234,231,0) 60%);
+}
+
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  .top-fade {
+    background: linear-gradient(180deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0) 60%);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Page bottom spacing utility so fixed illustrations blend without overlapping content */
+.page-bottom-space {
+  padding-bottom: 12rem; /* 192px - adjust if needed */
 }
 
 /* Custom animations for wedding invite */

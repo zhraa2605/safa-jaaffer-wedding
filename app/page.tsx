@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState, useRef } from 'react';
 
 export default function Home() {
@@ -7,6 +8,7 @@ export default function Home() {
   const [showContent, setShowContent] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [verseImageError, setVerseImageError] = useState(false);
 
   const handleVideoClick = () => {
     if (videoRef.current && !videoPlaying) {
@@ -29,7 +31,9 @@ export default function Home() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[##efeae7] overflow-hidden">
+    <div className="relative min-h-screen ">
+      {/* top fade to blend hero into page background */}
+      <div  aria-hidden />
       {/* Background Audio */}
       <audio
         ref={audioRef}
@@ -42,7 +46,7 @@ export default function Home() {
       {/* Full Screen Video */}
       {!showContent && (
         <div 
-          className={`fixed inset-0 z-50 flex items-center justify-center bg-black cursor-pointer transition-opacity duration-1000 ${videoPlaying ? 'opacity-100' : 'opacity-100'}`}
+          className={`fixed inset-0 z-50 flex items-center justify-center bg-white cursor-pointer transition-opacity duration-1000 ${videoPlaying ? 'opacity-100' : 'opacity-100'}`}
           onClick={handleVideoClick}
         >
           <video
@@ -68,83 +72,102 @@ export default function Home() {
       )}
 
       {/* Main Wedding Invitation Content */}
-      <div className={`relative z-10 transition-all duration-2000 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
+  <div className={`relative z-10 page-bottom-space transition-all duration-2000 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
         {/* Hero Section */}
-        <section className="relative h-screen flex items-center justify-center px-4 overflow-hidden">
-          {/* Background Image */}
-          <div 
-            className="absolute inset-0 bg-cover bg-center transform scale-110 animate-slow-zoom"
-            style={{
-              backgroundImage: 'url("/rings.jpg")',
-            }}
-          ></div>
+        <section className="relative h-[50dvh] flex items-top justify-top px-4 overflow-hidden">
+          
           
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70"></div>
           
           {/* Decorative Corner Elements */}
-          <div className="absolute top-8 left-8 w-32 h-32 border-t-2 border-l-2 border-white/30"></div>
-          <div className="absolute top-8 right-8 w-32 h-32 border-t-2 border-r-2 border-white/30"></div>
-          <div className="absolute bottom-8 left-8 w-32 h-32 border-b-2 border-l-2 border-white/30"></div>
-          <div className="absolute bottom-8 right-8 w-32 h-32 border-b-2 border-r-2 border-white/30"></div>
+          <div className="absolute top-3 left-8 w-32 h-32 border-t-2 border-l-2 border-zinc-900/30"></div>
+          <div className="absolute top-3 right-8 w-32 h-32 border-t-2 border-r-2 border-zinc-900/30"></div>
+          <div className="absolute bottom-8 left-8 w-32 h-32 border-b-2 border-l-2 border-zinc-900/30"></div>
+          <div className="absolute bottom-8 right-8 w-32 h-32 border-b-2 border-r-2 border-zinc-900/30"></div>
           
-          <div className="relative z-10 text-center space-y-12 max-w-5xl mx-auto px-4">
-            {/* Decorative Top */}
-            <div className="flex justify-center items-center gap-4 mb-8 animate-fadeIn">
-              <div className="w-24 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
-              <div className="text-white/80 text-3xl">✦</div>
-              <div className="w-24 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
-            </div>
-
-            {/* Main Names with Arabic Font */}
-            <div className="space-y-8 animate-slideDown">
-              <h1 className="text-white font-bold leading-relaxed" style={{ fontFamily: "'Amiri', 'Scheherazade New', serif" }}>
-                <span className="block text-7xl md:text-9xl mb-6 drop-shadow-2xl animate-fadeInScale">صفا</span>
-                <div className="flex justify-center items-center gap-6 my-8">
-                  <div className="w-16 h-px bg-white/60"></div>
-                  <span className="text-5xl md:text-6xl text-white/90">و</span>
-                  <div className="w-16 h-px bg-white/60"></div>
-                </div>
-                <span className="block text-7xl md:text-9xl mt-6 drop-shadow-2xl animate-fadeInScale delay-200">جعفر</span>
-              </h1>
-            </div>
-
-          
-
-            {/* Quranic Verse with decorative styling */}
-            <div className="pt-8 pb-8 animate-fadeIn delay-600">
+          <div className="relative z-10 text-center max-w-5xl mx-auto px-4">
+            {/* Quranic Verse with decorative styling (image fallback) - moved above names */}
+            <div className=" animate-slideUp delay-600">
               <div className="relative inline-block">
-                {/* <div className="absolute -top-6 -left-6 text-white/20 text-6xl">"</div>
-                <div className="absolute -bottom-6 -right-6 text-white/20 text-6xl">"</div> */}
-                <div className="bg-white/10 rounded-2xl px-8 py-6 shadow-2xl">
-                  <p className="text-white text-xl md:text-2xl leading-relaxed mb-2" style={{ fontFamily: "'Scheherazade New', 'Amiri', serif", lineHeight: '2' }}>
-                    وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا<br />
-                    لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
-                  </p>
-                  <p className="text-white/70 text-sm mt-3" style={{ fontFamily: "'Amiri', serif" }}>
-                    سورة الروم - آية ٢١
-                  </p>
+                <div className=" px-6 max-w-xl mx-auto">
+
+                  {!verseImageError ? (
+                    <Image
+                      src="/quran-verse.png"
+                      alt="آية قرآنية"
+                      className="mx-auto  -mt-15 object-contain"
+                      onError={() => setVerseImageError(true)}
+                      width={1000}
+                      height={50}
+                    />
+                  ) : (
+                    <div>
+                      <p className="text-white text-xl md:text-2xl leading-relaxed mb-2" style={{ fontFamily: "'Scheherazade New', 'Amiri', serif", lineHeight: '2' }}>
+                        وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا<br />
+                        لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
+                      </p>
+                      <p className="text-white/70 text-sm mt-3" style={{ fontFamily: "'Amiri', serif" }}>
+                        سورة الروم - آية ٢١
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
 
+            {/* Decorative Top */}
+         
+
+         {/* Main Names with Arabic Font - Luxury Enhanced */}
+<div className="animate-slideDown absolute top-2/3 left-1/2 transform -translate-x-1/2 -translate-y-2/3">
+  <h1 className="text-zinc-900 leading-tight" style={{ fontFamily: "'Amiri', 'Scheherazade New', serif" }}>
+    <span className="block text-3xl md:text-7xl mb-4 animate-fadeInScale" 
+          style={{ 
+            fontWeight: 300, 
+            letterSpacing: '0.08em',
+            textShadow: '0 2px 8px rgba(0,0,0,0.08)'
+          }}>
+      الدكتورة صفا
+    </span>
+    
+    <div className="flex justify-center items-center gap-8 my-10">
+      <div className="w-20 h-px bg-gradient-to-r from-transparent via-amber-800/50 to-transparent"></div>
+      <span className="text-xl md:text-4xl text-amber-900/60" style={{ fontWeight: 300 }}>♦</span>
+      <div className="w-20 h-px bg-gradient-to-r from-transparent via-amber-800/50 to-transparent"></div>
+    </div>
+    
+    <span className="block text-3xl md:text-7xl mt-4 animate-fadeInScale delay-200" 
+          style={{ 
+            fontWeight: 300, 
+            letterSpacing: '0.08em',
+            textShadow: '0 2px 8px rgba(0,0,0,0.08)'
+          }}>
+      الدكتور جعفر
+    </span>
+  </h1>
+</div>
+
             {/* Decorative Bottom */}
             <div className="flex justify-center items-center gap-4 mt-12 animate-fadeIn delay-1200">
-              <div className="w-24 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
+              <div className="w-24 h-px bg-linear-to-r from-transparent via-white/60 to-transparent"></div>
               <div className="text-white/80 text-3xl">✦</div>
-              <div className="w-24 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent"></div>
+              <div className="w-24 h-px bg-linear-to-r from-transparent via-white/60 to-transparent"></div>
             </div>
           </div>
         </section>
 
         {/* Details Section - Date, Time, Location */}
-        <section className="relative py-20 px-4 bg-[#eee9e6]">
+        <section className="relative py-20 px-4 ">
           <div className="max-w-5xl mx-auto">
             {/* Invitation Text */}
-            <div className="text-center mb-12 animate-fadeIn">
-              <p className="text-[#545351] text-3xl md:text-4xl font-light mb-4" style={{ fontFamily: "'Amiri', serif" }}>
-                نتشرف بحضوركم حفل زفافنا
-              </p>
+            <div className="text-center mb-10 animate-fadeIn">
+              <p className="text-[#545351] text-2xl md:text-3xl font-light " style={{ fontFamily: "'Amiri', serif" }}>
+بمشاعر مليئة بالفرح والسعادة
+ولأن فرحتنا لا تكتمل إلا برؤيتكم
+<br />
+<span className="pt-50">
+ يسعدنا دعوتكم لحضور حفل زفاف 
+ </span>             </p>
               <div className="flex justify-center items-center gap-3 mt-6">
                 <div className="w-16 h-px bg-[#545351]/30"></div>
                 <div className="text-[#545351]/60 text-2xl">✦</div>
@@ -215,14 +238,34 @@ export default function Home() {
             </div>
 
             {/* Decorative Element */}
-            <div className="flex justify-center items-center gap-3 mt-16">
+            <div className="flex justify-center items-center gap-3 mt-16 mb-30">
               <div className="w-24 h-px bg-[#545351]/30"></div>
               <div className="text-[#545351]/60 text-3xl">❤</div>
               <div className="w-24 h-px bg-[#545351]/30"></div>
             </div>
           </div>
         </section>
+
+        {/* Fixed bottom illustration (never moves) - appears when hero/content is shown */}
+
       </div>
+       <div className={`fixed bottom-0 left-0 right-0 w-full z-30 pointer-events-none select-none transition-opacity duration-700 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
+  <div className="relative">
+    {/* Multiple layered shadows for smooth fade */}
+    <div className="absolute top-0 left-0 right-0 h-15 bg-gradient-to-b from-white via-white/80 to-transparent z-10"></div>
+    <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/90 to-transparent z-10"></div>
+    <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-white/70 to-transparent z-10"></div>
+    
+    <Image
+      src="/pride.png"
+      alt="زفاف - رسم"
+      width={1200}
+      height={200}
+      className="w-full h-auto object-contain"
+      priority={false}
+    />
+  </div>
+</div>
     </div>
   );
 }
