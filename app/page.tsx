@@ -127,7 +127,7 @@ export default function Home() {
             letterSpacing: '0.08em',
             textShadow: '0 2px 8px rgba(0,0,0,0.08)'
           }}>
-      الدكتورة صفا
+      الدكتور جعفر
     </span>
     
     <div className="flex justify-center items-center gap-8 my-10">
@@ -142,7 +142,7 @@ export default function Home() {
             letterSpacing: '0.08em',
             textShadow: '0 2px 8px rgba(0,0,0,0.08)'
           }}>
-      الدكتور جعفر
+      الدكتورة صفا
     </span>
   </h1>
 </div>
