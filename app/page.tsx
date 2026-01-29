@@ -38,7 +38,7 @@ export default function Home() {
       <audio
         ref={audioRef}
         loop
-        preload="auto"
+        preload="none"
       >
         <source src="/mp3.mp3" type="audio/mpeg" />
       </audio>
