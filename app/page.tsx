@@ -170,7 +170,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-
+         
         {/* Details Section - Date, Time, Location */}
         <section className="relative py-10 px-4 ">
           <div className="max-w-5xl mx-auto">
@@ -185,7 +185,7 @@ export default function Home() {
                   <div className="hidden md:block w-px h-20 bg-[#545351]/20"></div>
                   <div className="text-center">
                     <div className="text-[#545351]/70 text-sm mb-3 uppercase tracking-wider" style={{ fontFamily: "'Amiri', serif" }}>اليوم</div>
-                    <div className="text-[#545351] text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Amiri', serif" }}>الإثنين</div>
+                    <div className="text-[#545351] text-3xl md:text-4xl font-bold" style={{ fontFamily: "'Amiri', serif" }}>الثلاثاء</div>
                   </div>
                   <div className="hidden md:block w-px h-20 bg-[#545351]/20"></div>
                   <div className="text-center">
@@ -194,6 +194,14 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+            </div>
+
+            {/* Decorative Element (above location) */}
+          
+ <div className="flex justify-center items-center gap-3 mt-16 mb-10">
+              <div className="w-24 h-px bg-[#545351]/30"></div>
+              <div className="text-[#545351] text-lg" style={{ fontFamily: "'Amiri', serif" }}>جنة الاطفال منازلهم</div>
+              <div className="w-24 h-px bg-[#545351]/30"></div>
             </div>
 
             {/* Location Section with Map */}
