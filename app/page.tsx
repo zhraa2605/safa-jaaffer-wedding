@@ -95,7 +95,7 @@ export default function Home() {
                     <Image
                       src="/quran-verse.png"
                       alt="آية قرآنية"
-                      className="mx-auto  -mt-8 object-contain"
+                      className="mx-auto  -mt-4 object-contain"
                       onError={() => setVerseImageError(true)}
                       width={1000}
                       height={50}
@@ -132,7 +132,7 @@ export default function Home() {
     
     <div className="flex justify-center items-center gap-8 my-10">
       <div className="w-20 h-px bg-gradient-to-r from-transparent via-amber-800/50 to-transparent"></div>
-      <span className="text-xl md:text-4xl text-amber-900/60" style={{ fontWeight: 300 }}>♦</span>
+<span className="text-2xl md:text-4xl text-amber-900/60" style={{ fontWeight: 300, fontFamily: "'Amiri', serif" }}>و</span>
       <div className="w-20 h-px bg-gradient-to-r from-transparent via-amber-800/50 to-transparent"></div>
     </div>
     
