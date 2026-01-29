@@ -157,7 +157,7 @@ export default function Home() {
         </section>
 
         {/* Details Section - Date, Time, Location */}
-        <section className="relative py-20 px-4 ">
+        <section className="relative py-10 px-4 ">
           <div className="max-w-5xl mx-auto">
             {/* Invitation Text */}
             <div className="text-center mb-10 animate-fadeIn">
