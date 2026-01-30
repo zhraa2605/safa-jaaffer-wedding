@@ -169,6 +169,7 @@ export default function Home() {
             </div>
 
             {/* Decorative Element (above location) */}
+            {/* Updated styling for decorative element */}
           
  <div className="flex justify-center items-center gap-3 mt-16 mb-10">
               <div className="w-18 h-px bg-[#545351]/30"></div>
