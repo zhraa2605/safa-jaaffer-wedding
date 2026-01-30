@@ -2,38 +2,39 @@
 
 import Image from 'next/image';
 import { useState, useRef } from 'react';
+import EnvelopeCover from './components/EnvelopeCover';
+import VideoPlayer from './components/VideoPlayer';
 
 export default function Home() {
-  const [videoPlaying, setVideoPlaying] = useState(false);
+  const [showEnvelope, setShowEnvelope] = useState(true);
+  const [showVideo, setShowVideo] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [verseImageError, setVerseImageError] = useState(false);
 
-  const handleVideoClick = () => {
-    if (videoRef.current && !videoPlaying) {
-      setVideoPlaying(true);
-      videoRef.current.playbackRate = 0.5;
-      videoRef.current.play();
-      
-      // Start audio when video plays
+  const handleEnvelopeClick = () => {
+    setShowEnvelope(false);
+    setShowVideo(true);
+    // Start video and audio immediately
+    setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.playbackRate = 0.5;
+        videoRef.current.play();
+      }
       if (audioRef.current) {
         audioRef.current.play();
       }
-    }
+    }, 100);
   };
 
   const handleVideoEnd = () => {
+    setShowVideo(false);
     setShowContent(true);
-    setTimeout(() => {
-      setVideoPlaying(false);
-    }, 1000);
   };
 
   return (
     <div className="relative min-h-screen ">
-      {/* top fade to blend hero into page background */}
-      <div  aria-hidden />
       {/* Background Audio */}
       <audio
         ref={audioRef}
@@ -43,37 +44,19 @@ export default function Home() {
         <source src="/mp3.mp3" type="audio/mpeg" />
       </audio>
 
-      {/* Full Screen Video */}
-      {!showContent && (
-        <div 
-          className={`fixed inset-0 z-50 flex items-center justify-center bg-white cursor-pointer transition-opacity duration-1000 ${videoPlaying ? 'opacity-100' : 'opacity-100'}`}
-          onClick={handleVideoClick}
-        >
-          <video
-            ref={videoRef}
-            className="w-full h-screen object-cover"
-            onEnded={handleVideoEnd}
-            playsInline
-            muted={true}
-            
-          >
-            <source src="/wedding-video.mp4" type="video/mp4" />
-          </video>
-          
+      {/* Envelope Cover - Shows First */}
+      {showEnvelope && <EnvelopeCover onOpen={handleEnvelopeClick} />}
 
+      {/* Full Screen Video - No transitions */}
+      {showVideo && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
+          <VideoPlayer ref={videoRef} onEnded={handleVideoEnd} />
         </div>
       )}
 
-      {/* Fade overlay when video ends */}
-      {videoPlaying && (
-        <div 
-          className={`fixed inset-0 z-40 bg-black pointer-events-none transition-opacity duration-1000 ${showContent ? 'opacity-0' : 'opacity-0'}`}
-        />
-      )}
-
       {/* Main Wedding Invitation Content */}
-  <div className={`relative z-10 page-bottom-space transition-all duration-2000 ${showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'}`}>
-        {/* Hero Section */}
+      {showContent && (
+  <div className="relative z-10 page-bottom-space">{/* Hero Section */}
         <section className="relative flex items-top justify-top px-4 overflow-hidden">
           
           
@@ -252,35 +235,35 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* Fixed bottom illustration (never moves) - appears when hero/content is shown */}
-
       </div>
-       <div className={`fixed bottom-0 left-0 right-0 w-full z-30 pointer-events-none select-none transition-opacity duration-700 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
-  <div className="relative">
-        {/* Multiple layered shadows ABOVE the image for smooth fade - prevents text from showing under image */}
-    <div className="absolute -top-32 left-0 right-0 h-32 bg-gradient-to-t from-white via-white to-transparent z-20"></div>
-    <div className="absolute -top-24 left-0 right-0 h-24 bg-gradient-to-t from-white/95 to-transparent z-20"></div>
-    <div className="absolute -top-16 left-0 right-0 h-16 bg-gradient-to-t from-white/90 to-transparent z-20"></div>
-    <div className="absolute -top-8 left-0 right-0 h-8 bg-gradient-to-t from-white/80 to-transparent z-20"></div>
-    
-    {/* Multiple layered shadows ON TOP of the image for smooth fade to page content */}
-    <div className="absolute top-0 left-0 right-0 h-15 bg-gradient-to-b from-white via-white/80 to-transparent z-10"></div>
-    <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/90 to-transparent z-10"></div>
-    <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-white/70 to-transparent z-10"></div>
-    
+      )}
 
-    
-    <Image
-      src="/pride.png"
-      alt="زفاف - رسم"
-      width={1200}
-      height={200}
-      className="w-full h-auto object-contain"
-      priority={false}
-    />
-  </div>
-</div>
+      {/* Fixed bottom illustration - appears when content is shown */}
+      {showContent && (
+        <div className="fixed bottom-0 left-0 right-0 w-full z-30 pointer-events-none select-none">
+          <div className="relative">
+            {/* Multiple layered shadows ABOVE the image for smooth fade - prevents text from showing under image */}
+            <div className="absolute -top-32 left-0 right-0 h-32 bg-gradient-to-t from-white via-white to-transparent z-20"></div>
+            <div className="absolute -top-24 left-0 right-0 h-24 bg-gradient-to-t from-white/95 to-transparent z-20"></div>
+            <div className="absolute -top-16 left-0 right-0 h-16 bg-gradient-to-t from-white/90 to-transparent z-20"></div>
+            <div className="absolute -top-8 left-0 right-0 h-8 bg-gradient-to-t from-white/80 to-transparent z-20"></div>
+            
+            {/* Multiple layered shadows ON TOP of the image for smooth fade to page content */}
+            <div className="absolute top-0 left-0 right-0 h-15 bg-gradient-to-b from-white via-white/80 to-transparent z-10"></div>
+            <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-white/90 to-transparent z-10"></div>
+            <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-white/70 to-transparent z-10"></div>
+            
+            <Image
+              src="/pride.png"
+              alt="زفاف - رسم"
+              width={1200}
+              height={200}
+              className="w-full h-auto object-contain"
+              priority={false}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
