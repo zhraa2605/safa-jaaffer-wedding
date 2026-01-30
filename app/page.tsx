@@ -1,32 +1,24 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, useRef } from 'react';
-import EnvelopeCover from './components/EnvelopeCover';
+import { useState, useRef, useEffect } from 'react';
 import VideoPlayer from './components/VideoPlayer';
 
 export default function Home() {
-  const [showEnvelope, setShowEnvelope] = useState(true);
-  const [showVideo, setShowVideo] = useState(false);
+  const [showVideo, setShowVideo] = useState(true);
   const [showContent, setShowContent] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [verseImageError, setVerseImageError] = useState(false);
 
-  const handleEnvelopeClick = () => {
-    setShowEnvelope(false);
-    setShowVideo(true);
-    // Start video and audio immediately
-    setTimeout(() => {
-      if (videoRef.current) {
-        videoRef.current.playbackRate = 0.5;
-        videoRef.current.play();
-      }
-      if (audioRef.current) {
-        audioRef.current.play();
-      }
-    }, 100);
-  };
+  // Auto-play audio when video starts
+  useEffect(() => {
+    if (showVideo && audioRef.current) {
+      audioRef.current.play().catch(() => {
+        console.log('Audio autoplay prevented');
+      });
+    }
+  }, [showVideo]);
 
   const handleVideoEnd = () => {
     setShowVideo(false);
@@ -34,7 +26,7 @@ export default function Home() {
   };
 
   return (
-    <div className="relative min-h-screen ">
+    <div className="relative min-h-screen bg-black">
       {/* Background Audio */}
       <audio
         ref={audioRef}
@@ -44,20 +36,17 @@ export default function Home() {
         <source src="/mp3.mp3" type="audio/mpeg" />
       </audio>
 
-      {/* Envelope Cover - Shows First */}
-      {showEnvelope && <EnvelopeCover onOpen={handleEnvelopeClick} />}
-
-      {/* Full Screen Video - No transitions */}
+      {/* Full Screen Video - Plays immediately on load */}
       {showVideo && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
+        <div className="fixed inset-0 z-60 flex items-center justify-center bg-black">
           <VideoPlayer ref={videoRef} onEnded={handleVideoEnd} />
         </div>
       )}
 
       {/* Main Wedding Invitation Content */}
       {showContent && (
-  <div className="relative z-10 page-bottom-space">{/* Hero Section */}
-        <section className="relative flex items-top justify-top px-4 overflow-hidden">
+  <div className="relative z-10 page-bottom-space bg-white">{/* Hero Section */}
+        <section className="relative flex items-top justify-top px-4 overflow-hidden bg-white">
           
           
           {/* Gradient Overlay */}
@@ -155,7 +144,7 @@ export default function Home() {
         </section>
          
         {/* Details Section - Date, Time, Location */}
-        <section className="relative py-10 px-4 ">
+        <section className="relative py-10 px-4 bg-white">
           <div className="max-w-5xl mx-auto">
             {/* Date, Time and Day Card */}
             <div className="mb-12 animate-slideUp delay-200">
@@ -182,9 +171,9 @@ export default function Home() {
             {/* Decorative Element (above location) */}
           
  <div className="flex justify-center items-center gap-3 mt-16 mb-10">
-              <div className="w-24 h-px bg-[#545351]/30"></div>
-              <div className="text-[#545351] text-lg" style={{ fontFamily: "'Amiri', serif" }}>جنة الاطفال منازلهم</div>
-              <div className="w-24 h-px bg-[#545351]/30"></div>
+              <div className="w-18 h-px bg-[#545351]/30"></div>
+              <div className="text-[#545351] text-2xl" style={{ fontFamily: "'Amiri', serif" }}>جنة الاطفال منازلهم</div>
+              <div className="w-18 h-px bg-[#545351]/30"></div>
             </div>
 
             {/* Location Section with Map */}
